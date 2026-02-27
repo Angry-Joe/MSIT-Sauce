@@ -1,3 +1,17 @@
+/*
+================================================================================
+Script:         Create ITSM Service Request Schema
+Description:    This script creates the core ServiceRequests table, its
+                supporting lookup tables, and a notes table for a new
+                ITSM application.
+
+Author:         Joe Leary
+                (Scaffolded with assistance from Google's Gemini Enterprise)
+Creation Date:  2026-02-27
+AI Model Used:  Gemini Enterprise
+================================================================================
+*/
+
 -- You would write this directly in a .sql file in VS Code
 INSERT INTO ServiceTickets
     (TicketID, Description, AssignedTo)
@@ -50,42 +64,3 @@ VALUES
 
 ALTER TABLE WorkRoles
 ADD WorkGroup INT
-
-CREATE TABLE ServiceCases
-(
-    CaseID INT PRIMARY KEY IDENTITY(1,1),
-    FK_BusId INT,
-    CustomerName NVARCHAR(100) NOT NULL,
-    Channel NVARCHAR(100),
-    FK_IssueState INT,
-    Priority INT DEFAULT 4,
-    CallerName NVARCHAR(100),
-    CallerBestContactNumber NVARCHAR(50),
-    CallerBestEmail NVARCHAR(255),
-    FK_AssignmentGroup INT,
-    FK_AssignedTo INT,
-    FK_BusinessService INT,
-    FK_SiteID INT,
-    LocationManEntry NVARCHAR(100),
-    ShortDescription NVARCHAR(255),
-    Description NVARCHAR(MAX),
-    WorkNotes NVARCHAR(MAX),
-    DateResolved DATETIME2,
-    ResolvedBy INT
-
-    FOREIGN KEY (FK_BusID) REFERENCES dbo.Customers(BusID)
-    FOREIGN KEY (FK_IssueState) REFERENCES dbo.IssueStatus(StatusID)
-    FOREIGN KEY (FK_AssignmentGroup) REFERENCES Customers(BusIDNo)
-    FOREIGN KEY (FK_BusIDNo) REFERENCES Customers(BusIDNo)
-
-);
-
-GO
-CREATE TABLE IssueStatus (
-    StatusID INT PRIMARY KEY IDENTITY(1,1),
-    StatusDisplay NVARCHAR(30),
-    DisplayOrder TINYINT
-);
-
-INSERT INTO IssueStatus(StatusDisplay,DisplayOrder)
-VALUES ('Routine',1),('Priority',2),('Immediate',3),('Flash',4);
