@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\New-FullProjectApp.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\GenAINotes.md||{24510B54-A648-4D69-A6C5-F68CBDF07546}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\DRServiceManagement\\CreateItsmDbTables.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\DRServiceManagement\\CreateItsmDbTables.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GenAINotes.md",
+              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\GenAINotes.md",
+              "RelativeDocumentMoniker": "..\\..\\GenAINotes.md",
+              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\GenAINotes.md",
+              "RelativeToolTip": "..\\..\\GenAINotes.md",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-02-28T02:36:53.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateItsmDbTables.sql ",
+              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\DRServiceManagement\\CreateItsmDbTables.sql",
+              "RelativeDocumentMoniker": "..\\..\\DRServiceManagement\\CreateItsmDbTables.sql",
+              "ToolTip": "CreateItsmDbTables.sql ",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-28T02:27:15.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "New-FullProjectApp.ps1",
+              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\New-FullProjectApp.ps1",
+              "RelativeDocumentMoniker": "..\\..\\New-FullProjectApp.ps1",
+              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\New-FullProjectApp.ps1",
+              "RelativeToolTip": "..\\..\\New-FullProjectApp.ps1",
+              "ViewState": "AgIAADMBAAAAAAAAAAAQwFwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-28T02:18:48.575Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
