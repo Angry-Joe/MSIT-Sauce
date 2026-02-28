@@ -4,6 +4,7 @@ C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Ap
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.AssemblyInfoInputs.cache
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.AssemblyInfo.cs
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.csproj.CoreCompileInputs.cache
+C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.sourcelink.json
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\bin\Debug\net10.0\appsettings.Development.json
@@ -141,7 +142,6 @@ C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\bin\Debug\net10.0\runtimes\win\l
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\bin\Debug\net10.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -151,10 +151,10 @@ C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\staticwebasset
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\staticwebassets.development.json
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\swae.build.ex.cache
-C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpD.47654394.Up2Date
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.dll
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\refint\DR-HelpDesk.Api.dll
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.pdb
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\DR-HelpDesk.Api.genruntimeconfig.cache
 C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\ref\DR-HelpDesk.Api.dll
+C:\jdlcode\repos\MSIT-Sauce\src\DR-HelpDesk.Api\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

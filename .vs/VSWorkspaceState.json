@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DRServiceManagement",
+    "\\src",
+    "\\src\\DR-HelpDesk.Api",
+    "\\src\\DR-HelpDesk.Api\\Data"
   ],
+  "SelectedNode": "\\src\\DR-HelpDesk.Api\\Data\\AppDbContext.cs",
   "PreviewInSolutionExplorer": false
 }

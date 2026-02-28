@@ -1,0 +1,65 @@
+erDiagram
+    Customers ||--o{ Sites : "has"
+    Customers ||--o{ Contacts : "has"
+    Sites ||--o{ Contacts : "can have"
+    Customers ||--o{ ServiceRequests : "requests"
+    Contacts ||--o{ ServiceRequests : "is requested by"
+
+    ServiceRequests {
+        int ServiceRequestID PK
+        string Title
+        string Description
+        int RequestorContactID FK
+        int CustomerID FK
+        int BusinessServiceID FK
+        int RequestStateID FK
+        int AssignmentGroupID FK
+        int AssignedToEmployeeID FK
+    }
+
+    ServiceRequestNotes {
+        int NoteID PK
+        int ServiceRequestID FK
+        string NoteText
+        int CreatedByEmployeeID FK
+    }
+    ServiceRequests ||--|{ ServiceRequestNotes : "has"
+    Employees ||--o{ ServiceRequestNotes : "creates"
+
+    BusinessServices {
+        int BusinessServiceID PK
+        string ServiceName
+        int DefaultAssignmentGroupID FK
+    }
+    ServiceCategories {
+        int ServiceCategoryID PK
+        int BusinessServiceID FK
+        string CategoryName
+    }
+    ServiceSubcategories {
+        int ServiceSubcategoryID PK
+        int ServiceCategoryID FK
+        string SubcategoryName
+    }
+    BusinessServices ||--o{ ServiceCategories : "contains"
+    ServiceCategories ||--o{ ServiceSubcategories : "contains"
+    ServiceRequests }o--|| BusinessServices : "is classified by"
+
+    Employees {
+        int EmployeeID PK
+        string FirstName
+        string LastName
+        string Email
+    }
+    AssignmentGroups {
+        int AssignmentGroupID PK
+        string GroupName
+    }
+    EmployeeGroupMemberships {
+        int EmployeeID PK, FK
+        int AssignmentGroupID PK, FK
+    }
+    Employees ||--|{ EmployeeGroupMemberships : "is member of"
+    AssignmentGroups ||--|{ EmployeeGroupMemberships : "has member"
+    ServiceRequests }o--|| Employees : "is assigned to"
+    ServiceRequests }o--|| AssignmentGroups : "is assigned to"

@@ -11,11 +11,11 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("faca9f75-e44f-42bd-a4b8-f4ae0030d5b5")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("53d262ba-5786-4603-a605-f468262a418f")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("DR-HelpDesk.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0f2dbf5519beb77414eefe2cd58dcf07740f764")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fa4358447e95f6b71de3619902da068fbae363b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DR-HelpDesk.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DR-HelpDesk.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

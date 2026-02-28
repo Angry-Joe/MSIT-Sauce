@@ -1,41 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DR_HelpDesk.Api.Models;
 
-public class Employee
+public partial class Employee
 {
-    [Key]  // This will be the Entra ObjectId (GUID as string)
-    [Required]
-    [MaxLength(50)]
-    public string Id { get; set; } = string.Empty;   // e.g. "a1b2c3d4-..." from Entra
+    public int EmployeeId { get; set; }
 
-    [Required]
-    [MaxLength(200)]
-    public string DisplayName { get; set; } = string.Empty;
+    public Guid? EntraObjectId { get; set; }
 
-    [Required]
-    [EmailAddress]
-    [MaxLength(150)]
-    public string Email { get; set; } = string.Empty;
+    public string FirstName { get; set; } = null!;
 
-    [MaxLength(150)]
+    public string LastName { get; set; } = null!;
+
+    public string DisplayName { get; set; } = null!;
+
+    public string Email { get; set; } = null!;
+
     public string? JobTitle { get; set; }
 
-    [MaxLength(100)]
-    public string? Department { get; set; }
+    public bool IsActive { get; set; }
 
-    [MaxLength(30)]
-    public string? Phone { get; set; }
+    public virtual ICollection<ServiceRequest> ServiceRequestAssignedToEmployees { get; set; } = new List<ServiceRequest>();
 
-    public bool IsActive { get; set; } = true;
+    public virtual ICollection<ServiceRequestNote> ServiceRequestNotes { get; set; } = new List<ServiceRequestNote>();
 
-    public bool IsOnCall { get; set; } = false;
+    public virtual ICollection<ServiceRequest> ServiceRequestResolvedByEmployees { get; set; } = new List<ServiceRequest>();
 
-    [MaxLength(50)]
-    public string? SLATier { get; set; } = "Standard";  // for future reporting
-
-    public DateTime LastSyncedFromEntra { get; set; } = DateTime.UtcNow;
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAt { get; set; }
+    public virtual ICollection<AssignmentGroup> AssignmentGroups { get; set; } = new List<AssignmentGroup>();
 }

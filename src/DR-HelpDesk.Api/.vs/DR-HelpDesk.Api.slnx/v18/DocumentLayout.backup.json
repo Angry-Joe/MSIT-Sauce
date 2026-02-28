@@ -3,23 +3,16 @@
   "WorkspaceRootPath": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|c:\\jdlcode\\repos\\msit-sauce\\src\\dr-helpdesk.api\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|solutionrelative:models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\New-FullProjectApp.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\JDL\\AppData\\Roaming\\Microsoft\\UserSecrets\\faca9f75-e44f-42bd-a4b8-f4ae0030d5b5\\secrets.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\GenAINotes.md||{24510B54-A648-4D69-A6C5-F68CBDF07546}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|c:\\jdlcode\\repos\\msit-sauce\\src\\dr-helpdesk.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\DRServiceManagement\\CreateItsmDbTables.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|c:\\jdlcode\\repos\\msit-sauce\\src\\dr-helpdesk.api\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|solutionrelative:migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|c:\\jdlcode\\repos\\msit-sauce\\src\\dr-helpdesk.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58D058B9-070E-CB4C-6894-907EB839F6CB}|DR-HelpDesk.Api.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\jdlcode\\repos\\MSIT-Sauce\\DRServiceManagement\\CreateItsmDbTables.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -44,68 +37,44 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Contact.cs",
-              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Models\\Contact.cs",
-              "RelativeDocumentMoniker": "Models\\Contact.cs",
-              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Models\\Contact.cs",
-              "RelativeToolTip": "Models\\Contact.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-27T21:50:36.537Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "secrets.json",
-              "DocumentMoniker": "C:\\Users\\JDL\\AppData\\Roaming\\Microsoft\\UserSecrets\\faca9f75-e44f-42bd-a4b8-f4ae0030d5b5\\secrets.json",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Users\\JDL\\AppData\\Roaming\\Microsoft\\UserSecrets\\faca9f75-e44f-42bd-a4b8-f4ae0030d5b5\\secrets.json",
-              "ToolTip": "C:\\Users\\JDL\\AppData\\Roaming\\Microsoft\\UserSecrets\\faca9f75-e44f-42bd-a4b8-f4ae0030d5b5\\secrets.json",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Users\\JDL\\AppData\\Roaming\\Microsoft\\UserSecrets\\faca9f75-e44f-42bd-a4b8-f4ae0030d5b5\\secrets.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-27T21:46:18.906Z",
+              "Title": "GenAINotes.md",
+              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\GenAINotes.md",
+              "RelativeDocumentMoniker": "..\\..\\GenAINotes.md",
+              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\GenAINotes.md",
+              "RelativeToolTip": "..\\..\\GenAINotes.md",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-02-28T02:36:53.571Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T21:50:10.767Z",
+              "Title": "CreateItsmDbTables.sql ",
+              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\DRServiceManagement\\CreateItsmDbTables.sql",
+              "RelativeDocumentMoniker": "..\\..\\DRServiceManagement\\CreateItsmDbTables.sql",
+              "ToolTip": "CreateItsmDbTables.sql ",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-28T02:27:15.771Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Migrations\\AppDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "Migrations\\AppDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Migrations\\AppDbContextModelSnapshot.cs",
-              "RelativeToolTip": "Migrations\\AppDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T21:49:49.498Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\src\\DR-HelpDesk.Api\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T21:49:29.997Z",
+              "DocumentIndex": 0,
+              "Title": "New-FullProjectApp.ps1",
+              "DocumentMoniker": "C:\\jdlcode\\repos\\MSIT-Sauce\\New-FullProjectApp.ps1",
+              "RelativeDocumentMoniker": "..\\..\\New-FullProjectApp.ps1",
+              "ToolTip": "C:\\jdlcode\\repos\\MSIT-Sauce\\New-FullProjectApp.ps1",
+              "RelativeToolTip": "..\\..\\New-FullProjectApp.ps1",
+              "ViewState": "AgIAADMBAAAAAAAAAAAQwF0BAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-28T02:18:48.575Z",
               "EditorCaption": ""
             }
           ]

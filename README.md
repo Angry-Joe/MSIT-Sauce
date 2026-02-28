@@ -10,11 +10,11 @@ The first objective in Sauce is to build an IT Service Management solution in Az
 
 ### Products/Services included in Project
     Virtual Network
-    Azure SQL Server and Database
     Azure Bastion Host for security, load balancing
     Load Balancer
     Application Gateway
     DNS Zones
+    Azure SQL Server and Database
     Web Application Firewall
     Web application itself
     Entra ID

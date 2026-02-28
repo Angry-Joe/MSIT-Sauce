@@ -1,46 +1,37 @@
-﻿using System.ComponentModel.DataAnnotations;
-using DR_HelpDesk.Api.Models;   // for navigation properties
+﻿using System;
+using System.Collections.Generic;
 
 namespace DR_HelpDesk.Api.Models;
 
-public class Contact {
-    public Guid Id { get; set; } = Guid.NewGuid();
+public partial class Contact
+{
+    public int ContactId { get; set; }
 
-    [Required]
-    public Guid CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
-    public Guid? CustomerSiteId { get; set; }   // nullable — can be company-level or site-specific
+    public int? SiteId { get; set; }
 
-    [Required]
-    [MaxLength(100)]
-    public string FirstName { get; set; } = string.Empty;
+    public string FirstName { get; set; } = null!;
 
-    [Required]
-    [MaxLength(100)]
-    public string LastName { get; set; } = string.Empty;
+    public string LastName { get; set; } = null!;
 
-    [EmailAddress]
-    [MaxLength(150)]
-    public string Email { get; set; } = string.Empty;
+    public string EmailAddress { get; set; } = null!;
 
-    [MaxLength(30)]
-    public string? Phone { get; set; }
+    public string? JobTitle { get; set; }
 
-    [MaxLength(30)]
-    public string? Mobile { get; set; }
+    public string? PhoneNumber { get; set; }
 
-    [MaxLength(150)]
-    public string? Title { get; set; }   // e.g. "IT Manager", "Facilities Coordinator"
+    public bool IsPrimaryContactForCustomer { get; set; }
 
-    public bool IsPrimary { get; set; } = false;
+    public bool IsPrimaryContactForSite { get; set; }
 
-    [MaxLength(2000)]
-    public string? Notes { get; set; }
+    public DateTime CreatedDate { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAt { get; set; }
+    public bool IsActive { get; set; }
 
-    // Navigation properties (for EF Core)
-    public Customer? Customer { get; set; }
-    public CustomerSite? CustomerSite { get; set; }
+    public virtual Customer Customer { get; set; } = null!;
+
+    public virtual ICollection<ServiceRequest> ServiceRequests { get; set; } = new List<ServiceRequest>();
+
+    public virtual Site? Site { get; set; }
 }
