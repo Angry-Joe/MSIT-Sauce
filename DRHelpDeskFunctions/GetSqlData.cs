@@ -6,7 +6,7 @@ using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 
 //namespace DRHelpDeskFunctions
-namespace DRHelpDeskFunctions.Functions
+namespace DRHelpDeskFunctions
 {
 	public class GetSqlData
 	{
