@@ -11,7 +11,7 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'DRHelpDeskFunctions'
-  DOTNET_VERSION: '10.0'
+  DOTNET_VERSION: '8.0'
 
 jobs:
   build-and-deploy:
@@ -51,3 +51,4 @@ jobs:
           app-name: 'drhelpdeskfunc'
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+
