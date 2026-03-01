@@ -1,6 +1,0 @@
-@DR_HelpDesk.Api_HostAddress = http://localhost:5063
-
-GET {{DR_HelpDesk.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
