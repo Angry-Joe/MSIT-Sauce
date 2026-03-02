@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "SqlConnection": "Server=tcp:dr-helpdesk-sql-2026.database.windows.net,1433;Initial Catalog=DR-HelpDeskDB;User ID=sqladmin;Password=8uhepumu#uT?a;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+  },
+  "ConnectionStrings": {},
+  "Host": {}
+}
