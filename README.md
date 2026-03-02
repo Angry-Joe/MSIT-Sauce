@@ -43,3 +43,6 @@ The first objective in Sauce is to build an IT Service Management solution in Az
 - <https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/?view=aspnetcore-10.0&tabs=visual-studio>
 
 - <https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/additional-claims?view=aspnetcore-10.0>
+
+- [Host a web application with Azure App Service - Training | Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/?source=recommendations)
+- [Quickstart: Direct web traffic using PowerShell - Azure Application Gateway | Microsoft Learn](https://learn.microsoft.com/en-us/azure/application-gateway/quick-create-powershell)
