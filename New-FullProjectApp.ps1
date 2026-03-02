@@ -6,64 +6,79 @@
 
 #># This is the order the scripts should run to build the project soup-to-nuts
 ### GLOBALS ###
-$resourceGroupName = "DR-HelpDesk-RG"
-$location = "EastUS"
-$vnetName = "DR-HelpDesk-VNet"
-$databaseSubnetName = "Database-Subnet"
-$sqlServerName = "dr-helpdesk-sql-2026" # The name of your existing Azure SQL Server
-$privateEndpointName = "sqlep-itsm-01" # A name for the new private endpoint resource
-$privateLinkConnectionName = "sqlConnection-itsm-01" # A name for the connection within the endpoint
-$bastionHostName = "itsm-bastion-host"
-$publicIpName = "itsm-bastion-pip" # Name for the Bastion's Public IP address
+$rgName                 = "DR-HelpDesk-RG"
+$location               = "EastUS"
+$vnetName               = "DR-HelpDesk-VNet"
+$vnetAddressPrefix      = "10.0.0.0/16"
+
+# Work in progress. This should be a loop to generate subnet configs for all that gets passed into VNet creation
+$subnets = @(
+    @{ Name="WebApp-Subnet";      AddressPrefix="10.0.1.0/24" },
+    @{ Name="Database-Subnet";    AddressPrefix="10.0.2.0/24" },
+    @{ Name="AzureBastionSubnet"; AddressPrefix="10.0.3.0/26" },
+    @{ Name="AppGateway-Subnet";  AddressPrefix="10.0.4.0/24" }
+)
+
+$databaseSubnetName     = "Database-Subnet"
+$sqlServerName          = "dr-helpdesk-sql-2026" # The name of your existing Azure SQL Server
+$pvtEndpointName        = "sqlep-itsm-01" # A name for the new private endpoint resource
+$pvtLinkConnName        = "sqlConnection-itsm-01" # A name for the connection within the endpoint
+
+$bastionHostName        = "Dr-helpdesk-bastion-host"
+$publicIpName           = "Dr-helpdesk-bastion-pip" # Name for the Bastion's Public IP address
+
+$appServicePlanName     = "ASP-DRHelpDeskRG-b824"
+$webAppName             = "drhelpdesk-webapp" # Must be globally unique across Azure
+$webAppSubnetName       = "WebApp-Subnet"
+$webAppPIPName          = "dr-helpdesk-appgateway-pip"
+
+$appGatewayName         = "dr-helpdesk-appgateway"
+$appGatewaySubnetName   = "AppGatewaySubnet"
+$wafPolicyName          = "dr-helpdesk-waf-policy"
 
 
+$vnet   # Placeholder for VNet object to be used across functions. Created in New-VNet function.
 
 # Create virtual network and subnets
 function New-VNet {
     # --- Configuration Variables ---
-    $vnetAddressPrefix = "10.0.0.0/16"
+    #$vnetAddressPrefix = "10.0.0.0/16"
 
     # --- Subnet Definitions ---
-
-    $webAppSubnetName = "WebApp-Subnet"
-    $webAppSubnetPrefix = "10.0.1.0/24"
-
-    $databaseSubnetName = "Database-Subnet"
-    $databaseSubnetPrefix = "10.0.2.0/24"
-
-    $bastionSubnetName = "AzureBastionSubnet" # This name is mandatory for the Bastion service
-    $bastionSubnetPrefix = "10.0.3.0/26"
-
     $appParms       = @{ Name="WebApp-Subnet";      AddressPrefix="10.0.1.0/24" }
     $dbParms        = @{ Name="Database-Subnet";    AddressPrefix="10.0.2.0/24" }
     $bastionParms   = @{ Name="AzureBastionSubnet"; AddressPrefix="10.0.3.0/26" }
+    $appGWParms     = @{ Name="AppGateway-Subnet";  AddressPrefix="10.0.4.0/24" }
 
-    # 1. Create the Subnet Configuration Objects in memory
-    $webAppSubnet = New-AzVirtualNetworkSubnetConfig @appParms
+    # Create the Subnet Configuration Objects in memory
+    $webAppSubnet   = New-AzVirtualNetworkSubnetConfig @appParms
     $databaseSubnet = New-AzVirtualNetworkSubnetConfig @dbParms
-    $bastionSubnet = New-AzVirtualNetworkSubnetConfig @bastionParms
+    $bastionSubnet  = New-AzVirtualNetworkSubnetConfig @bastionParms
+    $appGWSubnet    = New-AzVirtualNetworkSubnetConfig @appGWParms
 
-    # 2. Create the Virtual Network in Azure with the defined subnets
-    New-AzVirtualNetwork -Name $vnetName `
-        -ResourceGroupName $resourceGroupName `
+    # Create the Virtual Network in Azure with the defined subnets
+    $vnet = New-AzVirtualNetwork -Name $vnetName `
+        -ResourceGroupName $rgName `
         -Location $location `
         -AddressPrefix $vnetAddressPrefix `
-        -Subnet $webAppSubnet, $databaseSubnet, $bastionSubnet
+        -Subnet $webAppSubnet, $databaseSubnet, $bastionSubnet, $appGWSubnet
 
-    Write-Host "Virtual Network '$vnetName' and its subnets have been created successfully."
+    Return $vnet
+
+    Write-Information "Virtual Network '$vnetName' and its subnets have been created successfully." -InformationAction Continue
 }
+$vnet = New-VNet
 
 # Secure Azure SQL Database - disables public access and creates a private endpoint.
-
 function Set-AzDBNetSecurityOptions {
     # --- Configuration Variables ---
-    #$resourceGroupName = "YourRGName"
+    #$rgName = "YourRGName"
     #$location = "EastUS" # Must be the same region as your VNet
     #$vnetName = "YourVnetName"
     #$databaseSubnetName = "Database-Subnet"
     #$sqlServerName = "YourSqlServerName" # The name of your existing Azure SQL Server
-    #$privateEndpointName = "sqlep-itsm-01" # A name for the new private endpoint resource
-    #$privateLinkConnectionName = "sqlConnection-itsm-01" # A name for the connection within the endpoint
+    #$pvtEndpointName = "sqlep-itsm-01" # A name for the new private endpoint resource
+    #$pvtLinkConnName = "sqlConnection-itsm-01" # A name for the connection within the endpoint
 
     <#
     Verification
@@ -74,30 +89,30 @@ function Set-AzDBNetSecurityOptions {
     #>
     # --- Configuration Variables ---
     # !! Fill these in with your existing resource names !!
-    #$resourceGroupName = "YourResourceGroupName"
+    #$rgName = "YourResourceGroupName"
     #$location = "EastUS" # Must be the same region as your VNet
     #$vnetName = "ITSM-VNet"
     #$databaseSubnetName = "Database-Subnet"
 
     #$sqlServerName = "YourSqlServerName" # The name of your existing Azure SQL Server
-    #$privateEndpointName = "sqlep-itsm-01" # A name for the new private endpoint resource
-    #$privateLinkConnectionName = "sqlConnection-itsm-01" # A name for the connection within the endpoint
+    #$pvtEndpointName = "sqlep-itsm-01" # A name for the new private endpoint resource
+    #$pvtLinkConnName = "sqlConnection-itsm-01" # A name for the connection within the endpoint
 
 
     # --- Script Execution ---
 
     # 1. Get the existing virtual network and the specific subnet for the database
     Write-Host "Fetching VNet and Subnet details..."
-    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
+    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
     $subnet = Get-AzVirtualNetworkSubnetConfig -Name $databaseSubnetName -VirtualNetwork $virtualNetwork
 
     # 2. Get the existing Azure SQL Server resource
     Write-Host "Fetching Azure SQL Server details..."
-    $sqlServer = Get-AzSqlServer -ResourceGroupName $resourceGroupName -ServerName $sqlServerName
+    $sqlServer = Get-AzSqlServer -ResourceGroupName $rgName -ServerName $sqlServerName
 
     # 3. Disable Public Network Access on the SQL Server
     Write-Host "Disabling public network access on '$sqlServerName'..."
-    Set-AzSqlServer -ResourceGroupName $resourceGroupName `
+    Set-AzSqlServer -ResourceGroupName $rgName `
         -ServerName $sqlServerName `
         -PublicNetworkAccess "Disabled"
 
@@ -107,26 +122,26 @@ function Set-AzDBNetSecurityOptions {
     # This is a multi-step process: define the connection, then create the endpoint resource.
 
     # Define the connection to the SQL server
-    $privateLinkServiceConnection = New-AzPrivateLinkServiceConnection -Name $privateLinkConnectionName `
+    $privateLinkServiceConnection = New-AzPrivateLinkServiceConnection -Name $pvtLinkConnName `
         -PrivateLinkServiceId $sqlServer.Id `
         -GroupId "sqlServer" # This specific GroupId tells Azure you're connecting to a SQL Server
 
     # Create the private endpoint resource in your database subnet
     Write-Host "Creating the private endpoint..."
-    New-AzPrivateEndpoint -Name $privateEndpointName `
-        -ResourceGroupName $resourceGroupName `
+    New-AzPrivateEndpoint -Name $pvtEndpointName `
+        -ResourceGroupName $rgName `
         -Location $location `
         -Subnet $subnet `
         -PrivateLinkServiceConnection $privateLinkServiceConnection
 
-    Write-Host "Private endpoint '$privateEndpointName' created successfully. Your database is now secured."
+    Write-Host "Private endpoint '$pvtEndpointName' created successfully. Your database is now secured."
 }
 
 # Deploy Azure Bastion for secure management access to network
 # . .\New-AzureBastion.ps1
 function New-AzureBastion {
     # --- Configuration Variables ---
-    #$resourceGroupName = "DR-HelpDesk-RG"
+    #$rgName = "DR-HelpDesk-RG"
     #$location = "EastUS" # Must be the same region as your VNet
     #$vnetName = "DR-HelpDesk-VNet"
     #$bastionHostName = "itsm-bastion-host"
@@ -135,11 +150,11 @@ function New-AzureBastion {
     # --- Script Execution ---
     # 1. Get the existing virtual network resource
     Write-Host "Fetching VNet details..."
-    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
+    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
     # 2. Create the Public IP Address for Azure Bastion
     # It MUST be a 'Standard' SKU and 'Static' allocation.
     Write-Host "Creating a standard public IP address for Bastion..."
-    $publicIp = New-AzPublicIpAddress -ResourceGroupName $resourceGroupName `
+    $publicIp = New-AzPublicIpAddress -ResourceGroupName $rgName `
         -Name $publicIpName `
         -Location $location `
         -AllocationMethod 'Static' `
@@ -147,105 +162,108 @@ function New-AzureBastion {
     # 3. Create the Azure Bastion Host
     # This command links the Bastion service to your VNet and the Public IP.
     Write-Host "Deploying Azure Bastion host. This may take 5-10 minutes..."
-    New-AzBastion -ResourceGroupName $resourceGroupName `
+    New-AzBastion -ResourceGroupName $rgName `
         -Name $bastionHostName `
         -PublicIpAddress $publicIp `
         -VirtualNetwork $virtualNetwork
     Write-Host "Azure Bastion host '$bastionHostName' deployed successfully."
 }
+
 # Crate App Service Plan - this is what allows the app to talk to SQL DB
 # . .\New-AzureAppService.ps1
 function New-AzureApp {
-    # --- Configuration Variables ---
-    $resourceGroupName = "DR-HelpDesk-RG"
-    $location = "EastUS" # Must be the same region as your VNet
-    $appServicePlanName = "DRHelpDesk-AppServicePlan"
-    $webAppName = "drhelpdesk-webapp" # Must be globally unique across Azure
-    $vnetName = "DR-HelpDesk-VNet"
-    $webAppSubnetName = "WebApp-Subnet"
-    # --- Script Execution ---
-    # 1. Create the App Service Plan
+    # Create the App Service Plan
     Write-Host "Creating App Service Plan '$appServicePlanName'..."
     New-AzAppServicePlan -Name $appServicePlanName `
-        -ResourceGroupName $resourceGroupName `
+        -ResourceGroupName $rgName `
         -Location $location `
         -Tier "Standard" `
         -WorkerSize 1
     Write-Host "App Service Plan '$appServicePlanName' created successfully."
-    # 2. Create the Web App and integrate it with the VNet
+
+    # Create the Web App and integrate it with the VNet
     Write-Host "Creating Web App '$webAppName' and integrating with VNet..."
-    New-AzWebApp -Name $webAppName `
-        -ResourceGroupName $resourceGroupName `
+    $webApp = New-AzWebApp `
+        -Name $webAppName `
+        -ResourceGroupName $rgName `
         -Location $location `
         -AppServicePlan $appServicePlanName
+
+    Write-Information "Web App '$webAppName' created. Now configuring VNet integration..." -InformationAction Continue
+    # This needs to be tested. How long after previous command can we set properties?
+    # Enable "Route All" in the Web App's configuration to ensure all traffic goes through the VNet.
+    $webApp = Get-AzWebApp -ResourceGroupName $rgName -Name $webAppName
+    $webApp.SiteConfig.VnetRouteAllEnabled = $true
+    Set-AzWebApp -WebApp $webApp
+
+    Restart-AzWebApp -ResourceGroupName $rgName -Name $webAppName
+
     # Get the existing virtual network and subnet for integration
-    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
-    $subnet = Get-AzVirtualNetworkSubnetConfig -Name $webAppSubnetName -VirtualNetwork $virtualNetwork
-    # Integrate the Web App with the VNet using Regional VNet Integration (requires Standard or higher tier)
-    Set-AzWebAppVnetRouteAllEnabled -ResourceGroupName $resourceGroupName `
-        -WebAppName $webAppName `
-        -VnetRouteAllEnabled $true
-    Set-AzWebAppVnetIntegration -ResourceGroupName $resourceGroupName `
-        -WebAppName $webAppName `
-        -SubnetId $subnet.Id
-    Write-Host "Web App '$webAppName' created and integrated with VNet successfully."
-}
-# Create and configure the App Gateway (pub endpoint, traffic distro, web app firewall)
-# . .\New-ProjectAppGateway.ps1
-function New-ProjectAppGateway {
-    # --- Configuration Variables ---
-    $resourceGroupName = "YourResourceGroupName"
-    $location = "EastUS"
-    $vnetName = "ITSM-VNet"
+    #$vnet = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
+    $subnet = Get-AzVirtualNetworkSubnetConfig -Name $webAppSubnetName -VirtualNetwork $vnet
 
-    # !! Use the globally unique name of the web app you created in the previous step !!
-    $webAppName = "your-unique-webapp-name"
+    # Apply the new subnet to your Virtual Network in Azure
+    #$vnet | Set-AzVirtualNetwork
 
-    # --- New Subnet for the Application Gateway ---
-    $appGatewaySubnetName = "AppGateway-Subnet"
-    $appGatewaySubnetPrefix = "10.0.4.0/24"
-
-    # --- Application Gateway Variables ---
-    $appGatewayName = "itsm-appgateway"
-    $publicIpName = "itsm-appgateway-pip"
-    $wafPolicyName = "itsm-waf-policy"
-
-
-    # --- Script Execution ---
-
-    # 1. Add a dedicated subnet for the Application Gateway to the VNet
-    Write-Host "Adding subnet '$appGatewaySubnetName' to VNet '$vnetName'..."
-    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
-    Add-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName -AddressPrefix $appGatewaySubnetPrefix -VirtualNetwork $virtualNetwork
-    $virtualNetwork | Set-AzVirtualNetwork # This command applies the change
-
-    # Refresh VNet variable to get the new subnet object
-    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
-    $appGatewaySubnet = Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName -VirtualNetwork $virtualNetwork
-
-    # 2. Create a Public IP Address for the Gateway
-    Write-Host "Creating public IP for Application Gateway..."
-    $publicIp = New-AzPublicIpAddress -ResourceGroupName $resourceGroupName `
-        -Name $publicIpName `
+    # Create a Public IP for the Gateway
+    $publicIP = New-AzPublicIpAddress `
+        -ResourceGroupName $rgName `
+        -Name $webAppPIPName `
         -Location $location `
         -AllocationMethod 'Static' `
         -Sku 'Standard'
 
+    # This should be covered in the web app creation line 171
+    ## Using Azure CLI create the VNet integration and enable "Route All"
+    #az webapp vnet-integration add `
+    #    --resource-group $rgName `
+    #    --name $webAppName `
+    #    --vnet $vnetName `
+    #    --subnet $webAppSubnetName
+
+    ## After the CLI command, we need to enable "Route All" in the Web App's configuration to ensure all traffic goes through the VNet.
+    #$webApp = Get-AzWebApp -ResourceGroupName $rgName -Name $webAppName
+    #$webApp.SiteConfig.VnetRouteAllEnabled = $true
+    #Set-AzWebApp -WebApp $webApp
+
+    #Restart-AzWebApp -ResourceGroupName $rgName -Name $webAppName
+
+    Write-Host "Web App '$webAppName' created and integrated with VNet successfully."
+
+    Return $publicIp
+}
+$appGWPip = New-AzureApp
+
+# Create and configure the App Gateway (pub endpoint, traffic distro, web app firewall)
+# . .\New-ProjectAppGateway.ps1
+function New-ProjectAppGateway {
+    # Refresh VNet variable to get the newly created subnet object
+    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
+    $appGatewaySubnet = Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName -VirtualNetwork $virtualNetwork
+
+    # --- Script Execution ---
+
+    # Refresh VNet variable to get the new subnet object
+    $virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
+    $appGatewaySubnet = Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName -VirtualNetwork $virtualNetwork
+
+    #$appGWPip = Get-AzPublicIpAddress -ResourceGroupName $rgName -Name $webAppPIPName
+
     # 3. Create the Gateway's IP Configuration
     Write-Host "Configuring frontend IP..."
     $frontendIpConfig = New-AzApplicationGatewayFrontendIPConfig -Name 'appGatewayFrontendIP' `
-        -PublicIPAddress $publicIp
+        -PublicIPAddress $appGWPip
 
     # 4. Create the Backend Address Pool (pointing to your App Service)
     Write-Host "Configuring backend address pool..."
-    $webAppFqdn = (Get-AzWebApp -Name $webAppName -ResourceGroupName $resourceGroupName).DefaultHostName
-    $backendPool = New-AzApplicationGatewayBackendAddressPool -Name 'itsm-backend-pool' `
+    $webAppFqdn = (Get-AzWebApp -Name $webAppName -ResourceGroupName $rgName).DefaultHostName
+    $backendPool = New-AzApplicationGatewayBackendAddressPool -Name 'dr-helpdesk-webapp-backend-pool' `
         -BackendFqdns $webAppFqdn
 
     # 5. Create the HTTP Settings and Health Probe
     Write-Host "Configuring HTTP settings and health probe..."
     # The health probe checks the health of your web app
-    $probe = New-AzApplicationGatewayProbeConfig -Name 'itsm-probe' `
+    $probe = New-AzApplicationGatewayProbeConfig -Name 'dr-webapp-probe' `
         -Protocol 'Http' `
         -HostName $webAppFqdn `
         -Path '/' `
@@ -254,7 +272,7 @@ function New-ProjectAppGateway {
         -UnhealthyThreshold 3
 
     # The HTTP settings define how the gateway talks to the backend
-    $httpSettings = New-AzApplicationGatewayBackendHttpSettings -Name 'itsm-http-settings' `
+    $httpSettings = New-AzApplicationGatewayBackendHttpSettings -Name 'dr-webapp-http-settings' `
         -Port 80 `
         -Protocol 'Http' `
         -CookieBasedAffinity 'Disabled' `
@@ -264,13 +282,15 @@ function New-ProjectAppGateway {
     # 6. Create the Frontend Listener and Routing Rule
     Write-Host "Configuring listener and routing rule..."
     # The listener waits for incoming traffic on Port 80
-    $listener = New-AzApplicationGatewayHttpListener -Name 'itsm-http-listener' `
+    $frontendPort = New-AzApplicationGatewayFrontendPort -Name 'appGatewayFrontendPort' -Port 80
+
+    $listener = New-AzApplicationGatewayHttpListener -Name 'dr-webapp-http-listener' `
         -Protocol 'Http' `
         -FrontendIPConfiguration $frontendIpConfig `
-        -FrontendPort 80
+        -FrontendPort $frontendPort  # <-- Use the object here instead of the number 80
 
     # The rule ties the listener to the backend pool
-    $rule = New-AzApplicationGatewayRequestRoutingRule -Name 'itsm-routing-rule' `
+    $rule = New-AzApplicationGatewayRequestRoutingRule -Name 'dr-webapp-routing-rule' `
         -RuleType 'Basic' `
         -HttpListener $listener `
         -BackendAddressPool $backendPool `
@@ -278,88 +298,110 @@ function New-ProjectAppGateway {
 
     # 7. Create the Web Application Firewall (WAF) Policy
     Write-Host "Creating WAF policy..."
-    $wafPolicy = New-AzApplicationGatewayFirewallPolicy -Name $wafPolicyName `
-        -ResourceGroupName $resourceGroupName `
+    $wafPolicy = New-AzApplicationGatewayFirewallPolicy `
+        -Name $wafPolicyName `
+        -ResourceGroupName $rgName `
         -Location $location `
-        -Mode 'Prevention'
+
+    # Update the 'Mode' setting on the policy object in PowerShell
+    $wafPolicy.PolicySettings.Mode = "Prevention"
+
+    # Apply the change back to the policy resource in Azure
+    Set-AzApplicationGatewayFirewallPolicy -InputObject $wafPolicy
 
     # 8. Create the Application Gateway Resource
     # This command assembles all the previous components.
     Write-Host "Deploying Application Gateway. This will take 15-30 minutes..."
+
     $appGatewaySku = New-AzApplicationGatewaySku -Name 'WAF_v2' -Tier 'WAF_v2' -Capacity 2
+    $gatewayIpConfig = New-AzApplicationGatewayIPConfiguration -Name 'appGatewayIpConfig' -Subnet $appGatewaySubnet
+    $frontendIpConfig = New-AzApplicationGatewayFrontendIPConfig -Name 'appGatewayFrontendIP' -PublicIPAddress $appGWPip
+    $wafConfig = New-AzApplicationGatewayWebApplicationFirewallConfiguration -Enabled $true -FirewallMode "Prevention" -RuleSetType "OWASP" -RuleSetVersion "3.2"
 
     New-AzApplicationGateway -Name $appGatewayName `
-        -ResourceGroupName $resourceGroupName `
+        -ResourceGroupName $rgName `
         -Location $location `
         -Sku $appGatewaySku `
-        -FirewallPolicy $wafPolicy `
-        -VirtualNetwork $virtualNetwork `
-        -Subnet $appGatewaySubnet `
+        -GatewayIPConfigurations $gatewayIpConfig `
+        -WebApplicationFirewallConfiguration $wafConfig
+        -FirewallPolicyId $wafPolicy.Id `
         -FrontendIPConfigurations $frontendIpConfig `
+        -FrontendPorts $frontendPort.Port `
         -BackendAddressPools $backendPool `
         -BackendHttpSettingsCollection $httpSettings `
         -HttpListeners $listener `
         -RequestRoutingRules $rule `
         -Probes $probe
 
-    Write-Host "Application Gateway '$appGatewayName' deployed successfully!"
+        # --- Configuration Variables ---
+    # Ensure these are set correctly from our previous steps
+    $resourceGroupName = "DR-HelpDesk-RG"
+    $location = "EastUS"
+    $vnetName = "DR-HelpDesk-VNet"
+    $webAppName = "drhelpdesk-webapp"
+    $appGatewaySubnetName = "AppGatewaySubnet"
+    $appGatewayName = "dr-helpdesk-appgateway"
+    $publicIpName = "dr-helpdesk-appgateway-pip"
+    $wafPolicyName = "dr-helpdesk-waf-policy"
+
+    # --- Re-gather Azure Objects to Ensure They Are Correct ---
+    Write-Host "Gathering required Azure resources..."
+    $appGatewaySubnet = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName | Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName
+    $publicIp = Get-AzPublicIpAddress -Name $publicIpName -ResourceGroupName $resourceGroupName
+    $wafPolicy = Get-AzApplicationGatewayFirewallPolicy -Name $wafPolicyName -ResourceGroupName $resourceGroupName
+
+    # --- Step 1: Define All Configuration Objects ---
+    Write-Host "Defining Application Gateway configuration objects..."
+
+    $gatewayIpConfig = New-AzApplicationGatewayIPConfiguration -Name 'appGatewayIpConfig' -Subnet $appGatewaySubnet
+    $frontendIpConfig = New-AzApplicationGatewayFrontendIPConfig -Name 'appGatewayFrontendIP' -PublicIPAddress $publicIp
+    $frontendPort = New-AzApplicationGatewayFrontendPort -Name 'appGatewayFrontendPort' -Port 80
+    $webAppFqdn = (Get-AzWebApp -Name $webAppName -ResourceGroupName $resourceGroupName).DefaultHostName
+    $backendPool = New-AzApplicationGatewayBackendAddressPool -Name 'itsm-backend-pool' -BackendFqdns $webAppFqdn
+    $probe = New-AzApplicationGatewayProbeConfig -Name 'itsm-probe' -Protocol 'Http' -HostName $webAppFqdn -Path '/' -Interval 30 -Timeout 30 -UnhealthyThreshold 3
+    $httpSettings = New-AzApplicationGatewayBackendHttpSettings -Name 'itsm-http-settings' -Port 80 -Protocol 'Http' -CookieBasedAffinity 'Disabled' -Probe $probe -RequestTimeout 30
+    $listener = New-AzApplicationGatewayHttpListener -Name 'itsm-http-listener' -Protocol 'Http' -FrontendIPConfiguration $frontendIpConfig -FrontendPort $frontendPort
+    $rule = New-AzApplicationGatewayRequestRoutingRule -Name 'itsm-routing-rule' -RuleType 'Basic' -Priority 100 -HttpListener $listener -BackendAddressPool $backendPool -BackendHttpSettings $httpSettings
+    $appGatewaySku = New-AzApplicationGatewaySku -Name 'WAF_v2' -Tier 'WAF_v2' -Capacity 2
+
+    # --- Step 2: Assemble and Deploy the Application Gateway ---
+    Write-Host "⏳ Assembling configuration and deploying Application Gateway. This will take 15-30 minutes..."
+
+    New-AzApplicationGateway -Name $appGatewayName `
+        -ResourceGroupName $resourceGroupName `
+        -Location $location `
+        -Sku $appGatewaySku `
+        -GatewayIPConfigurations @($gatewayIpConfig) `
+        -FirewallPolicy $wafPolicy `
+        -FrontendIPConfigurations @($frontendIpConfig) `
+        -FrontendPorts @($frontendPort) `
+        -BackendAddressPools @($backendPool) `
+        -BackendHttpSettingsCollection @($httpSettings) `
+        -HttpListeners @($listener) `
+        -RequestRoutingRules @($rule) `
+        -Probes @($probe)
+
+     <# Success!
+        Output:
+            PS C:\jdlcode> New-AzApplicationGateway -Name $appGatewayName `
+            >>     -ResourceGroupName $resourceGroupName `
+            >>     -Location $location `
+            >>     -Sku $appGatewaySku `
+            >>     -GatewayIPConfigurations @($gatewayIpConfig) `
+            >>     -FirewallPolicy $wafPolicy `
+            >>     -FrontendIPConfigurations @($frontendIpConfig) `
+            >>     -FrontendPorts @($frontendPort) `
+            >>     -BackendAddressPools @($backendPool) `
+            >>     -BackendHttpSettingsCollection @($httpSettings) `
+            >>     -HttpListeners @($listener) `
+            >>     -RequestRoutingRules @($rule) `
+            >>     -Probes @($probe)
+
+            ResourceGroupName Name                   Location Sku Name Policy Name EnableHttp2 EnableFips ForceFirewallPolicyAssoci
+                                                                                                          ation
+            ----------------- ----                   -------- -------- ----------- ----------- ---------- -------------------------
+            DR-HelpDesk-RG    dr-helpdesk-appgateway eastus   WAF_v2
+     #>
+
+    Write-Host "🎉 Application Gateway '$appGatewayName' deployed successfully!"
 }
-
-<#
-================================================================================
-Script:         Set-SQLPrivateEndpoint.ps1
-Description:    This script secures an existing Azure SQL Server by disabling
-                public network access and creating a private endpoint within a
-                specified virtual network subnet.
-================================================================================
-#>
-
-# --- Configuration Variables ---
-# !! Fill in these values with your actual Azure resource names !!
-
-$resourceGroupName = "DR-HelpDesk-RG"
-$location = "EastUS" # Must be the same region as your VNet and SQL Server
-$vnetName = "DR-HelpDesk-VNet"
-$databaseSubnetName = "Database-Subnet"
-
-# The name of your existing Azure SQL Server (the logical server, not the database itself)
-#$sqlServerName = "your-sql-server-name"
-
-# --- Script Execution ---
-
-# 1. Get the existing virtual network and the specific subnet for the database
-Write-Host "Fetching VNet and Subnet details for '$vnetName'..."
-$virtualNetwork = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
-$subnet = Get-AzVirtualNetworkSubnetConfig -Name $databaseSubnetName -VirtualNetwork $virtualNetwork
-
-# 2. Get the existing Azure SQL Server resource
-Write-Host "Fetching Azure SQL Server details for '$sqlServerName'..."
-$sqlServer = Get-AzSqlServer -ResourceGroupName $resourceGroupName -ServerName $sqlServerName
-
-# 3. Disable Public Network Access on the SQL Server
-# This is a critical security step. It ensures the only access path is the private one.
-Write-Host "Disabling public network access on '$sqlServerName'..."
-Set-AzSqlServer -ResourceGroupName $resourceGroupName `
-    -ServerName $sqlServerName `
-    -PublicNetworkAccess "Disabled"
-Write-Host "✅ Public access disabled successfully."
-
-# 4. Define the Private Endpoint and its connection
-# A 'Private Link Service Connection' tells the endpoint what it's connecting to.
-$privateLinkServiceConnection = New-AzPrivateLinkServiceConnection `
-    -Name "$sqlServerName-Pls-connection" `
-    -PrivateLinkServiceId $sqlServer.Id `
-    -GroupId "sqlServer" # This specific GroupId tells Azure you're connecting to a SQL Server resource
-
-# 5. Create the Private Endpoint resource
-# This command provisions the network interface in your subnet and links it to the SQL server.
-Write-Host "Creating the private endpoint..."
-$privateEndpointName = "$sqlServerName-private-endpoint"
-New-AzPrivateEndpoint -Name $privateEndpointName `
-    -ResourceGroupName $resourceGroupName `
-    -Location $location `
-    -Subnet $subnet `
-    -PrivateLinkServiceConnection $privateLinkServiceConnection
-
-Write-Host "✅ Private endpoint '$privateEndpointName' created successfully. Your database is now secured within your VNet."
-
