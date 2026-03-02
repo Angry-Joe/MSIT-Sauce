@@ -263,21 +263,25 @@ function New-ProjectAppGateway {
     # 5. Create the HTTP Settings and Health Probe
     Write-Host "Configuring HTTP settings and health probe..."
     # The health probe checks the health of your web app
-    $probe = New-AzApplicationGatewayProbeConfig -Name 'dr-webapp-probe' `
+    $probe = New-AzApplicationGatewayProbeConfig `
+        -Name 'dr-webapp-probe' `
         -Protocol 'Http' `
-        -HostName $webAppFqdn `
+        #-HostName $webAppFqdn `
         -Path '/' `
         -Interval 30 `
         -Timeout 30 `
         -UnhealthyThreshold 3
+        -PickHostNameFromBackendHttpSettings
 
     # The HTTP settings define how the gateway talks to the backend
-    $httpSettings = New-AzApplicationGatewayBackendHttpSettings -Name 'dr-webapp-http-settings' `
+    $httpSettings = New-AzApplicationGatewayBackendHttpSettings `
+        -Name 'dr-webapp-http-settings' `
         -Port 80 `
         -Protocol 'Http' `
         -CookieBasedAffinity 'Disabled' `
         -Probe $probe `
         -RequestTimeout 30
+        -PickHostNameFromBackendAddress $true
 
     # 6. Create the Frontend Listener and Routing Rule
     Write-Host "Configuring listener and routing rule..."
@@ -318,6 +322,7 @@ function New-ProjectAppGateway {
     $frontendIpConfig = New-AzApplicationGatewayFrontendIPConfig -Name 'appGatewayFrontendIP' -PublicIPAddress $appGWPip
     $wafConfig = New-AzApplicationGatewayWebApplicationFirewallConfiguration -Enabled $true -FirewallMode "Prevention" -RuleSetType "OWASP" -RuleSetVersion "3.2"
 
+<#
     New-AzApplicationGateway -Name $appGatewayName `
         -ResourceGroupName $rgName `
         -Location $location `
@@ -332,7 +337,7 @@ function New-ProjectAppGateway {
         -HttpListeners $listener `
         -RequestRoutingRules $rule `
         -Probes $probe
-
+#>
         # --- Configuration Variables ---
     # Ensure these are set correctly from our previous steps
     $resourceGroupName = "DR-HelpDesk-RG"
@@ -343,7 +348,8 @@ function New-ProjectAppGateway {
     $appGatewayName = "dr-helpdesk-appgateway"
     $publicIpName = "dr-helpdesk-appgateway-pip"
     $wafPolicyName = "dr-helpdesk-waf-policy"
-
+    $fqdn = "drhelpdesk-webapp.azurewebsites.net"
+<#
     # --- Re-gather Azure Objects to Ensure They Are Correct ---
     Write-Host "Gathering required Azure resources..."
     $appGatewaySubnet = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName | Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName
@@ -366,9 +372,9 @@ function New-ProjectAppGateway {
 
     # --- Step 2: Assemble and Deploy the Application Gateway ---
     Write-Host "⏳ Assembling configuration and deploying Application Gateway. This will take 15-30 minutes..."
-
+#>
     New-AzApplicationGateway -Name $appGatewayName `
-        -ResourceGroupName $resourceGroupName `
+        -ResourceGroupName $rgName `
         -Location $location `
         -Sku $appGatewaySku `
         -GatewayIPConfigurations @($gatewayIpConfig) `

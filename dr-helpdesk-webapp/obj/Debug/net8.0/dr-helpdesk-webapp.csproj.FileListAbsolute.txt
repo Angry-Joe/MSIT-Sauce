@@ -155,3 +155,4 @@ C:\jdlcode\repos\MSIT-Sauce\dr-helpdesk-webapp\obj\Debug\net8.0\refint\dr-helpde
 C:\jdlcode\repos\MSIT-Sauce\dr-helpdesk-webapp\obj\Debug\net8.0\dr-helpdesk-webapp.pdb
 C:\jdlcode\repos\MSIT-Sauce\dr-helpdesk-webapp\obj\Debug\net8.0\dr-helpdesk-webapp.genruntimeconfig.cache
 C:\jdlcode\repos\MSIT-Sauce\dr-helpdesk-webapp\obj\Debug\net8.0\ref\dr-helpdesk-webapp.dll
+C:\jdlcode\repos\MSIT-Sauce\dr-helpdesk-webapp\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll
