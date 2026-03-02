@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "sqlproj: Build DRServiceManagement",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"c:/Users/1007982441.CIV/OneDrive - US Army/jdlcode/Repos/MSIT-Sauce/DRServiceManagement/DRServiceManagement.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"detail": "Builds the DRServiceManagement SQL project"
+		},
+		{
+			"label": "sqlproj: Build DRITSM",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"c:/Users/1007982441.CIV/OneDrive - US Army/jdlcode/Repos/MSIT-Sauce/DRITSM/DRITSM.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"detail": "Builds the DRITSM SQL project"
+		}
+	]
+}
