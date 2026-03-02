@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/jdlcode/repos/MSIT-Sauce/dr-helpdesk-webapp/Pages/HelpDesk.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGVscERlc2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/jdlcode/repos/MSIT-Sauce/dr-helpdesk-webapp/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

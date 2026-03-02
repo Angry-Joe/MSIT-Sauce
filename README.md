@@ -13,7 +13,9 @@ The first objective in Sauce is to build an IT Service Management solution in Az
 ### Products/Services included in Project
 
     Virtual Network
-    Azure Bastion Host for security, load balancing
+    App Service Plan
+    Azure Bastion Host
+    Azure Storage Accounts
     Load Balancer
     Application Gateway
     DNS Zones
@@ -26,14 +28,18 @@ The first objective in Sauce is to build an IT Service Management solution in Az
 
 ## Requirements
 
-Azure Functions Core Tools CLI  
-<https://go.microsoft.com/fwlink/?linkid=2174087>  
-EF Core Power Tools CLI  
-<https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools>  
+- Azure Functions Core Tools CLI: <https://go.microsoft.com/fwlink/?linkid=2174087>  
+- EF Core Power Tools CLI: <https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools>  
 
 ### References
 
-App Service explained: <https://learn.microsoft.com/en-us/azure/app-service/overview>
-<https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration>
-<https://learn.microsoft.com/en-us/azure/app-service/configure-vnet-integration-routing>
-<https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_vnet_route_all>
+- [Azure App Service explained](https://learn.microsoft.com/en-us/azure/app-service/overview)
+- <https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration>
+- <https://learn.microsoft.com/en-us/azure/app-service/configure-vnet-integration-routing>
+- <https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_vnet_route_all>
+
+### External login providers  
+
+- <https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/?view=aspnetcore-10.0&tabs=visual-studio>
+
+- <https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/additional-claims?view=aspnetcore-10.0>
