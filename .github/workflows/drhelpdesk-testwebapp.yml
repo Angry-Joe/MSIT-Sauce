@@ -46,8 +46,10 @@ jobs:
     - name: Azure Login
       uses: azure/login@v2
       with:
-        client-id: ${{ vars.drhelpdesk_testwebapp_CLIENT_ID_3401 }}
-        tenant-id: ${{ vars.drhelpdesk_testwebapp_TENANT_ID_3401 }}
+        # client-id: ${{ vars.drhelpdesk_testwebapp_CLIENT_ID_3401 }}
+        # tenant-id: ${{ vars.drhelpdesk_testwebapp_TENANT_ID_3401 }}
+        client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8F14B029F7404E4DB04BA3280F446843}}
+        tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9DC69E90F6AE402BAE6E3A263DEE3374 }}
         subscription-id: ${{ vars.drhelpdesk_testwebapp_SUBSCRIPTION_ID_3401 }}
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
