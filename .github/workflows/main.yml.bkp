@@ -1,0 +1,51 @@
+# This is the name of your GitHub Actions workflow.
+name: Build and Deploy ASP.NET Core App to Azure Web App
+
+# This section defines when the workflow will run.
+on:
+  # It triggers every time you push code to the 'main' branch.
+  push:
+    branches:
+      - main
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This job is named 'build-and-deploy'
+  build-and-deploy:
+    # It will run on the latest version of an Ubuntu Linux virtual machine.
+    runs-on: ubuntu-latest
+
+    # These are the steps the job will execute.
+    steps:
+      # Step 1: Checks out your repository code so the workflow can access it.
+      - name: 'Checkout Github Action'
+        uses: actions/checkout@v3
+
+      # Step 2: Sets up the .NET environment.
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          # Use the .NET version your project is targeting.
+          dotnet-version: '8.0.x'
+
+      # Step 3: Builds the project. The --configuration Release flag ensures it's optimized.
+      - name: Build with dotnet
+        run: dotnet build ./dr-helpdesk-webapp --configuration Release
+
+      # Step 4: Publishes the project, preparing it for deployment.
+      - name: dotnet publish
+        run: |
+          dotnet publish ./dr-helpdesk-webapp -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+      # Step 5: Deploys the published app to your Azure App Service.
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        with:
+          # The name of your Azure Web App
+          app-name: 'drhelpdesk-webapp'
+          # This uses the secret you created to authenticate.
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          # The path to the folder that was just published.
+          package: '${{env.DOTNET_ROOT}}/myapp'
