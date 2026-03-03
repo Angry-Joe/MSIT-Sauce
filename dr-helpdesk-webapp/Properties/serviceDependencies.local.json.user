@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2026-03-02T00:59:41.3398787Z"
+    },
+    "appInsights1": {
+      "restored": true,
+      "restoreTime": "2026-03-02T22:33:47.2187803Z"
+    }
+  },
+  "parameters": {
+    "appInsights1.subscriptionId": {
+      "Name": "appInsights1.subscriptionId",
+      "Type": "subscription",
+      "Value": "75f05875-33d9-42dc-9edf-0fab77f8e5d5"
+    },
+    "appInsights1.resourceGroupName": {
+      "Name": "appInsights1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "DR-HelpDesk-RG"
+    }
+  }
+}

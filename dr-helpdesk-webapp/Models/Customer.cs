@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace dr_helpdesk_webapp.Models;
+
+public partial class Customer
+{
+    public int CustomerId { get; set; }
+
+    public string CompanyName { get; set; } = null!;
+
+    public string? PhoneNumber { get; set; }
+
+    public string? Address1 { get; set; }
+
+    public string? Address2 { get; set; }
+
+    public string? City { get; set; }
+
+    public string? StateOrProvince { get; set; }
+
+    public string? PostalCode { get; set; }
+
+    public string? Country { get; set; }
+
+    public DateTime CreatedDate { get; set; }
+
+    public bool IsActive { get; set; }
+
+    public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
+
+    public virtual ICollection<ServiceRequest> ServiceRequests { get; set; } = new List<ServiceRequest>();
+
+    public virtual ICollection<Site> Sites { get; set; } = new List<Site>();
+}
