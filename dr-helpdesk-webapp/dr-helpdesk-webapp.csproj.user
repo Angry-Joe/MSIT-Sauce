@@ -4,6 +4,6 @@
     <ActiveDebugProfile>https</ActiveDebugProfile>
     <RazorPage_SelectedScaffolderID>RazorPageScaffolder</RazorPage_SelectedScaffolderID>
     <RazorPage_SelectedScaffolderCategoryPath>root/Common/RazorPage</RazorPage_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>C:\jdlcode\repos\MSIT-Sauce\.github\workflows\drhelpdesk-webapp.yml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\jdlcode\repos\MSIT-Sauce\.github\workflows\drhelpdesk-testwebapp.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
