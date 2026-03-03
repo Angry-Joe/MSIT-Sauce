@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("f5d837d2-44ee-4f85-9e4a-8b9d02168481")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("DRHelpDeskFunctions")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8312d7e410abda68a84a1f4c9e80b0e4b3b074b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a26d58080fd4abd942476698f830114d554b4486")]
 [assembly: System.Reflection.AssemblyProductAttribute("DRHelpDeskFunctions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DRHelpDeskFunctions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

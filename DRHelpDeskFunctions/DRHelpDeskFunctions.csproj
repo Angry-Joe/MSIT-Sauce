@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>f5d837d2-44ee-4f85-9e4a-8b9d02168481</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
