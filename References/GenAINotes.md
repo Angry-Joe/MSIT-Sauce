@@ -1,3 +1,10 @@
+https://learn.microsoft.com/en-us/azure/well-architected/service-guides/azure-application-gateway  
+https://learn.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview  
+https://learn.microsoft.com/en-us/azure/well-architected/design-guides/release-engineering-continuous-integration  
+https://learn.microsoft.com/en-us/azure/architecture/web-apps/app-service/architectures/baseline-zone-redundant  
+https://learn.microsoft.com/en-us/azure/architecture/example-scenario/apps/fully-managed-secure-apps
+
+
 Of course, I can help with that. Based on your project requirements, establishing a virtual network (VNet) is not only recommended but also a foundational best practice for building a secure, scalable, and well-organized web application on Azure.
 
 Here is a breakdown of the recommended architecture and the benefits of using a virtual network for your IT Service Management web app:
