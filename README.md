@@ -4,30 +4,34 @@ Repo for projects I'm doing for my master's degree.
 
 ## TODO
 
--Add Entra External ID service to subscription to set up customer logins
+- Add Entra External ID service to subscription to set up customer logins
+- Configure email/Entra ID login for this app
+- Configure SSL certs for site and logins
 
 ## Scope
 
 The first objective in Sauce is to build an IT Service Management solution in Azure Cloud. I intend on  using this app in production on my business's web site. I want a customer login, and once authenticated, have access to a 'Help Desk System' where they can ask for help or request resources. I intend on writing in code to help keep track of Service Level Agreements and hot issues. There are a thousand products out there,m but I'm cheap and I love to code so I'm making my own.
 
-[IT Service Management module (Web App)](http://drhelpdesk-testwebapp.azurewebsites.net)  
+[IT Service Management module (Web App)](http://drhelpdesk-testwebapp.eastus.cloudapp.azure.com/)  
 [Azure Functions](https://drhelpdeskfunc-gtazfzathpg6fma0.eastus-01.azurewebsites.net/api/GetSqlData)
 
 ### Products/Services included in Project
 
-    Virtual Network
-    App Service Plan
-    Azure Bastion Host
-    Azure Storage Accounts
-    Load Balancer
-    Application Gateway
-    DNS Zones
-    Azure SQL Server and Database
-    Web Application Firewall
-    Web application itself
-    Entra ID
-    Entra External ID
-    Azure Communication Services (Pipe dream, but worth a shot)
+- Virtual Network
+- Azure Key Vault
+- App Service Plan
+- Application Gateway
+    - Load Balancer
+- Azure Bastion Host
+- Azure Storage Accounts
+- DNS Zones
+- Azure SQL Server and Database
+- Web Application Firewall
+- Web application itself
+- [App Service Certificate](https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-certificate?tabs=apex%2Crbac%2Cazure-cli)
+- Entra ID
+- Entra External ID (Microsoft ID - Done)
+- Azure Communication Services (Pipe dream, but worth a shot)
 
 ## Requirements
 
