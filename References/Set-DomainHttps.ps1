@@ -23,7 +23,7 @@ Before configuring the gateway, you must point your custom domain's DNS to the A
     $publicIpName = "itsm-appgateway-pip"
     Get-AzPublicIpAddress -ResourceGroupName $resourceGroupName -Name $publicIpName | Select-Object IpAddress,Fqdn
 
-<# 
+<#
 2.  **Create a DNS Record**: Go to your domain registrar's DNS management portal. Create a **`CNAME`** record that points your desired hostname (e.g., `www.your-itsm-app.com`) to the **`Fqdn`** (Fully Qualified Domain Name) from the command above. Using a `CNAME` is generally preferred over an `A` record with the IP address, as the FQDN will not change.
 
 **Note**: DNS changes can take some time to propagate across the internet.
@@ -108,12 +108,12 @@ Write-Host "Applying all changes to the Application Gateway. This may take a few
 Set-AzApplicationGateway -ApplicationGateway $appGateway
 
 Write-Host "Application Gateway configuration updated successfully for '$customDomainName'."
-```
+
 
 ### Verification
 
-Once the script completes and your DNS has propagated, you should be able to:
-1.  Navigate to `https://your-custom-domain.com` in a web browser.
-2.  See your deployed application.
-3.  See a lock icon in the address bar, indicating a secure HTTPS connection using your certificate.
-4.  If you try to go to `http://your-custom-domain.com`, you should be automatically redirected to the `https://` version.
+# Once the script completes and your DNS has propagated, you should be able to:
+# 1.  Navigate to `https://your-custom-domain.com` in a web browser.
+# 2.  See your deployed application.
+# 3.  See a lock icon in the address bar, indicating a secure HTTPS connection using your certificate.
+# 4.  If you try to go to `http://your-custom-domain.com`, you should be automatically redirected to the `https://` version.
