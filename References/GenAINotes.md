@@ -1,9 +1,8 @@
-https://learn.microsoft.com/en-us/azure/well-architected/service-guides/azure-application-gateway  
-https://learn.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview  
-https://learn.microsoft.com/en-us/azure/well-architected/design-guides/release-engineering-continuous-integration  
-https://learn.microsoft.com/en-us/azure/architecture/web-apps/app-service/architectures/baseline-zone-redundant  
-https://learn.microsoft.com/en-us/azure/architecture/example-scenario/apps/fully-managed-secure-apps
-
+<https://learn.microsoft.com/en-us/azure/well-architected/service-guides/azure-application-gateway>  
+<https://learn.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview>  
+<https://learn.microsoft.com/en-us/azure/well-architected/design-guides/release-engineering-continuous-integration>  
+<https://learn.microsoft.com/en-us/azure/architecture/web-apps/app-service/architectures/baseline-zone-redundant>  
+<https://learn.microsoft.com/en-us/azure/architecture/example-scenario/apps/fully-managed-secure-apps>
 
 Of course, I can help with that. Based on your project requirements, establishing a virtual network (VNet) is not only recommended but also a foundational best practice for building a secure, scalable, and well-organized web application on Azure.
 
@@ -99,3 +98,7 @@ What's Next?
 With the VNet and subnets in place, the next logical step is to secure the most critical piece of your infrastructure: your database.
 
 Shall we proceed with disabling public access to your Azure SQL Database and creating a private endpoint for it inside the Database-Subnet we just created? This will make it so the database can only be reached from within your secure VNet.
+
+### This Stupid Key Vault
+
+- [Prepare for Key Vault API version 2026-02-01 and later - Azure RBAC as default | Microsoft Learn](https://learn.microsoft.com/en-us/azure/key-vault/general/access-control-default?tabs=azure-powershell)

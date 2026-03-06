@@ -10,6 +10,14 @@
       "type": "appInsights.azure",
       "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING",
       "dynamicId": null
+    },
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.ServiceLinker/locations/eastus/connectors/ConnectionStringsIdentityConnection1_3A6329218B",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/dr-helpdesk-sql-2026/databases/DR-HelpDeskDB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:IdentityConnection1",
+      "dynamicId": null
     }
   }
 }
