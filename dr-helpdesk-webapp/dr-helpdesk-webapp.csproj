@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Data\ApplicationDbContext_Backup.txt" />
+    <Compile Include="C:\Users\JDL\Desktop\ApplicationDbContext_Backup.txt" Link="ApplicationDbContext_Backup.txt" />
   </ItemGroup>
 
   <ItemGroup>
