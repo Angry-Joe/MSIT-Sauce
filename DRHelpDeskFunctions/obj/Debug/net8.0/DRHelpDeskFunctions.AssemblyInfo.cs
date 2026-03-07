@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DRHelpDeskFunctions")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba6169c3e13bf532a0a6e9203966f5a751f4ca3f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e61979f36b039131ced087359e78c7499830f442")]
 [assembly: System.Reflection.AssemblyProductAttribute("DRHelpDeskFunctions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DRHelpDeskFunctions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
