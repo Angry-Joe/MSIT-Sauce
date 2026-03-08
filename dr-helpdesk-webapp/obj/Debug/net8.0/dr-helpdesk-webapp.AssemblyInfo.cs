@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dr-helpdesk-webapp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e61979f36b039131ced087359e78c7499830f442")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+452a1583340e2b969a52bf9852a8f635b07c6cdd")]
 [assembly: System.Reflection.AssemblyProductAttribute("dr-helpdesk-webapp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dr-helpdesk-webapp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
