@@ -1,37 +1,113 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "sqlproj: Build DRServiceManagement",
-			"type": "process",
-			"command": "dotnet",
-			"args": [
-				"build",
-				"c:/Users/1007982441.CIV/OneDrive - US Army/jdlcode/Repos/MSIT-Sauce/DRServiceManagement/DRServiceManagement.sqlproj"
-			],
-			"problemMatcher": "$sqlproj-problem-matcher",
-			"isBackground": true,
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-			"detail": "Builds the DRServiceManagement SQL project"
-		},
-		{
-			"label": "sqlproj: Build DRITSM",
-			"type": "process",
-			"command": "dotnet",
-			"args": [
-				"build",
-				"c:/Users/1007982441.CIV/OneDrive - US Army/jdlcode/Repos/MSIT-Sauce/DRITSM/DRITSM.sqlproj"
-			],
-			"problemMatcher": "$sqlproj-problem-matcher",
-			"isBackground": true,
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-			"detail": "Builds the DRITSM SQL project"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "sqlproj: Build DRServiceManagement",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "c:/Users/1007982441.CIV/OneDrive - US Army/jdlcode/Repos/MSIT-Sauce/DRServiceManagement/DRServiceManagement.sqlproj"
+      ],
+      "problemMatcher": "$sqlproj-problem-matcher",
+      "isBackground": true,
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "detail": "Builds the DRServiceManagement SQL project"
+    },
+    {
+      "label": "sqlproj: Build DRITSM",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "c:/Users/1007982441.CIV/OneDrive - US Army/jdlcode/Repos/MSIT-Sauce/DRITSM/DRITSM.sqlproj"
+      ],
+      "problemMatcher": "$sqlproj-problem-matcher",
+      "isBackground": true,
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "detail": "Builds the DRITSM SQL project"
+    },
+    {
+      "label": "clean (functions)",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/DRHelpDeskFunctions"
+      }
+    },
+    {
+      "label": "build (functions)",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "dependsOn": "clean (functions)",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/DRHelpDeskFunctions"
+      }
+    },
+    {
+      "label": "clean release (functions)",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "--configuration",
+        "Release",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/DRHelpDeskFunctions"
+      }
+    },
+    {
+      "label": "publish (functions)",
+      "command": "dotnet",
+      "args": [
+        "publish",
+        "--configuration",
+        "Release",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "type": "process",
+      "dependsOn": "clean release (functions)",
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/DRHelpDeskFunctions"
+      }
+    },
+    {
+      "type": "func",
+      "dependsOn": "build (functions)",
+      "options": {
+        "cwd": "${workspaceFolder}/DRHelpDeskFunctions/bin/Debug/net8.0"
+      },
+      "command": "host start",
+      "isBackground": true,
+      "problemMatcher": "$func-dotnet-watch"
+    }
+  ]
 }
