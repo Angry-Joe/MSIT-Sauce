@@ -50,9 +50,6 @@ $vnet   # Placeholder for VNet object to be used across functions. Created in Ne
 
 # Create virtual network and subnets
 function New-VNet {
-    # --- Configuration Variables ---
-    #$vnetAddressPrefix = "10.0.0.0/16"
-
     # --- Subnet Definitions ---
     $appParms       = @{ Name="WebApp-Subnet";      AddressPrefix="10.0.1.0/24" }
     $dbParms        = @{ Name="Database-Subnet";    AddressPrefix="10.0.2.0/24" }
@@ -180,7 +177,6 @@ function New-AzureBastion {
 }
 
 # Crate App Service Plan - this is what allows the app to talk to SQL DB
-# . .\New-AzureAppService.ps1
 function New-AzureApp {
     # Create the App Service Plan
     Write-Host "Creating App Service Plan '$appServicePlanName'..."
@@ -214,7 +210,7 @@ function New-AzureApp {
     $subnet = Get-AzVirtualNetworkSubnetConfig -Name $webAppSubnetName -VirtualNetwork $vnet
 
     # Apply the new subnet to your Virtual Network in Azure
-    #$vnet | Set-AzVirtualNetwork
+    $vnet | Set-AzVirtualNetwork
 
     # Create a Public IP for the Gateway
     $publicIP = New-AzPublicIpAddress `
@@ -231,21 +227,19 @@ function New-AzureApp {
 $appGWPip = New-AzureApp
 
 # Create and configure the App Gateway (pub endpoint, traffic distro, web app firewall)
-# . .\New-ProjectAppGateway.ps1
 function New-ProjectAppGateway {
     # Refresh VNet variable to get the newly created subnet object
     $vnet = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroupName
     $appGatewaySubnet = Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName -VirtualNetwork $vnet
 
     # --- Script Execution ---
-
     # Refresh VNet variable to get the new subnet object
     $vnet = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
     $appGatewaySubnet = Get-AzVirtualNetworkSubnetConfig -Name $appGatewaySubnetName -VirtualNetwork $vnet
 
     #$appGWPip = Get-AzPublicIpAddress -ResourceGroupName $rgName -Name $webAppPIPName
 
-    # 3. Create the Gateway's IP Configuration
+    # Create the Gateway's IP Configuration
     Write-Host "Configuring frontend IP..."
     $frontendIpConfig = New-AzApplicationGatewayFrontendIPConfig `
         -Name 'appGatewayFrontendIP' `

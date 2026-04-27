@@ -11,13 +11,5 @@ namespace dr_helpdesk_webapp.Data
         {
         }
 
-        // Add your custom DbSets here (e.g., for support tickets)
-        // Example: public DbSet<SupportTicket> SupportTickets { get; set; }  // We'll define SupportTicket model later
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);  // Calls Identity's model setup
-            // Add any custom configurations here if needed (e.g., table mappings)
-        }
     }
 }

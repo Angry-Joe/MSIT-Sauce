@@ -4,11 +4,11 @@ Connect-AzAccount
 # 2. Replace these with your exact names (case-sensitive)
 $rg         = "DR-HelpDesk-RG"
 $vnetName   = "DR-HelpDesk-VNet"
-$drstorage  = "drhelpdeskstorage90477" # Must be globally unique, 3-24 chars, lowercase letters and numbers only
+$drstorage  = "drhelpdeskstorage90477" # Must be globally unique
 
 # 3. Run this
 Get-AzVirtualNetwork -ResourceGroupName $rg -Name $vnetName | ConvertTo-Json -Depth 12
-# Human-readable summary
+
 Get-AzVirtualNetwork -ResourceGroupName $rg -Name $vnetName |
     Format-List Name, Location, AddressSpace*, ProvisioningState
 

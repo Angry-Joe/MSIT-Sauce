@@ -13,6 +13,7 @@ Repo for projects I'm doing for my master's degree.
 The first objective in Sauce is to build an IT Service Management solution in Azure Cloud. I intend on  using this app in production on my business's web site. I want a customer login, and once authenticated, have access to a 'Help Desk System' where they can ask for help or request resources. I intend on writing in code to help keep track of Service Level Agreements and hot issues. There are a thousand products out there,m but I'm cheap and I love to code so I'm making my own.
 
 [IT Service Management module (Web App)](http://drhelpdesk-testwebapp.eastus.cloudapp.azure.com/)  
+[Web App custom DNS url](http://support.digitalreign.us/)  
 [Azure Functions](https://drhelpdeskfunc-gtazfzathpg6fma0.eastus-01.azurewebsites.net/api/GetSqlData)
 
 ### Products/Services included in Project
@@ -22,6 +23,7 @@ The first objective in Sauce is to build an IT Service Management solution in Az
 - App Service Plan
 - Application Gateway
     - Load Balancer
+    - Web Application Firewall
 - Azure Bastion Host
 - Azure Storage Accounts
 - DNS Zones
@@ -35,6 +37,7 @@ The first objective in Sauce is to build an IT Service Management solution in Az
 
 ## Requirements
 
+- Azure PowerShell Module: <https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-10.0.0>
 - Azure Functions Core Tools CLI: <https://go.microsoft.com/fwlink/?linkid=2174087>  
 - EF Core Power Tools CLI: <https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools>  
 
